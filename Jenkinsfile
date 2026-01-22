@@ -68,7 +68,7 @@ pipeline {
                 sh '''
                 aws lambda update-function-code \
                     --function-name $LAMBDA_CSV \
-                    --zip-file fileb://lambda/lambda.zip
+                    --zip-file fileb://lambda_function/lambda.zip
                 '''
             }
         }
