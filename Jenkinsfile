@@ -28,7 +28,7 @@ pipeline {
 
                     // Conditions
                     UI_CHANGED = changedFiles.any { it.startsWith("website/") }
-                    LAMBDA_CHANGED = changedFiles.any { it.startsWith("lambda/") }
+                    LAMBDA_CHANGED = changedFiles.any { it.startsWith("lambda_function/") }
 
                     echo "UI_CHANGED=${UI_CHANGED}"
                     echo "LAMBDA_CHANGED=${LAMBDA_CHANGED}"
