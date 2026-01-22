@@ -75,15 +75,16 @@ pipeline {
 
 
         stage('Deploy UI (Only if UI Changed)') {
-            when {
-                expression { UI_CHANGED }
-            }
-            steps {
-                sh """
-                aws s3 sync website/ s3://$S3_BUCKET/ --delete
-                """
-            }
+    when { expression { UI_CHANGED } }
+    steps {
+        withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+            sh """
+            aws s3 sync website/ s3://python-scripts12/ --delete
+            """
         }
+    }
+}
+
     }
 
     post {
