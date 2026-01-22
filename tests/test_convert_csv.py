@@ -1,6 +1,5 @@
-import json
-from lambda.convert_csv import lambda_handler
-
+import js
+from lambda_function.convert_csv import lambda_handler
 def test_missing_body():
     """Lambda should return error if no CSV is sent."""
     event = {"body": ""}
