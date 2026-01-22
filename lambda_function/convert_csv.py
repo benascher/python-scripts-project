@@ -8,7 +8,7 @@ import datetime
 s3 = boto3.client('s3')
 
 BUCKET = "python-scripts12"          
-OUTPUT_PREFIX = "output/"             # where Excel files go3 
+OUTPUT_PREFIX = "output/"             # where Excel files go4 
 
 def lambda_handler(event, context):
     try:

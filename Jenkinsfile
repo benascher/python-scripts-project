@@ -60,18 +60,19 @@ pipeline {
             }
         }
 
-        stage('Deploy Lambda (Only if Lambda Changed)') {
-            when {
-                expression { LAMBDA_CHANGED }
-            }
-            steps {
-                sh '''
-                aws lambda update-function-code \
-                    --function-name $LAMBDA_CSV \
-                    --zip-file fileb://lambda_function/lambda.zip
-                '''
-            }
+       stage('Deploy Lambda (Only if Lambda Changed)') {
+    when { expression { LAMBDA_CHANGED } }
+    steps {
+        withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+            sh """
+            aws lambda update-function-code \
+                --function-name convert_csv_to_excel \
+                --zip-file fileb://lambda_function/lambda.zip
+            """
         }
+    }
+}
+
 
         stage('Deploy UI (Only if UI Changed)') {
             when {
