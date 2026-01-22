@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sh '''
-                cd lambda
+                cd lambda_function
                 zip -r lambda.zip .
                 '''
             }
