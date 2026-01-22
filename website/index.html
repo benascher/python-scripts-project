@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSV to Excel Converter</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f1f1;
+            padding: 40px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            border-radius: 10px;
+            margin: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #0077ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background: #005fcc; }
+        #result { margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>CSV → Excel Converter</h1>
+
+<div class="card">
+    <h2>Upload CSV File</h2>
+
+    <input type="file" id="csvFile" accept=".csv">
+    <button onclick="convertCSV()">Convert to Excel</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+    // ✅ REPLACE THIS WITH YOUR LAMBDA FUNCTION URL:
+    const convertCsvUrl = "https://xyjkop5ilz5lmtz4dpt4devtua0ofrzf.lambda-url.us-east-1.on.aws/";
+
+    async function convertCSV() {
+        const fileInput = document.getElementById("csvFile");
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Please choose a CSV file!");
+            return;
+        }
+
+        const csvText = await file.text();
+
+        const response = await fetch(convertCsvUrl, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: csvText
+        });
+
+        const json = await response.json();
+        document.getElementById("result").innerText = json.message;
+    }
+</script>
+
+</body>
+</html>
+
