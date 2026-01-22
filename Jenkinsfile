@@ -41,7 +41,7 @@ pipeline {
                 expression { LAMBDA_CHANGED }
             }
             steps {
-			  sh """
+              sh """
               export PYTHONPATH=\$PYTHONPATH:$(pwd)
               pytest tests/
               """
